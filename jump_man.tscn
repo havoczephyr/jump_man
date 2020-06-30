@@ -18,3 +18,4 @@ shape = SubResource( 1 )
 [node name="head_camera" type="Camera" parent="head"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0 )
 current = true
+far = 8192.0

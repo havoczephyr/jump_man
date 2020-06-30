@@ -4,11 +4,13 @@ extends KinematicBody
 const QC_ARC = PI * 0.5
 
 #momentum vars
-export(float) var speed = 30
-export(float) var accel = 7
-export(float) var grav = 1.98
-export(float) var jump_power = 90
+export(float) var top_speed = 30
+export(float) var accel = 75
+export(float) var grav = 32
+export(float) var jump_power = 35
+export(float) var air_multi = 0.2
 var air_jump = true
+
 
 #camera scaler
 export(float) var mouse_sens = 0.3
@@ -35,7 +37,8 @@ func kill():
 	get_tree().reload_current_scene()
 	
 func jump():
-	velocity.y += jump_power
+	#velocity.y += jump_power
+	velocity.y = jump_power
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -73,15 +76,24 @@ func _physics_process(delta):
 	
 	#wigglewalking be damned!
 	direction = direction.normalized()
+	var step_accel = accel
+	if !is_on_floor():
+		step_accel *= air_multi
 	
 	#movement formula
-	velocity = velocity.linear_interpolate(direction * speed, accel * delta)
-	velocity.y -= grav * accel * delta
+	
+	#value velocity is moving towards
+	var target_vel = direction * top_speed
+	velocity.x = move_toward(velocity.x, target_vel.x, step_accel * delta)
+	velocity.z = move_toward(velocity.z, target_vel.z, step_accel * delta)
+	velocity.y -= grav * delta
 	
 	if Input.is_action_just_pressed("jump"):
 		if is_on_floor():
 			jump()
 		elif air_jump:
+			velocity.x = 0
+			velocity.z = 0
 			jump()
 			air_jump = false
 		
