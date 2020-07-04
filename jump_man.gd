@@ -4,10 +4,10 @@ extends KinematicBody
 const QC_ARC = PI * 0.5
 
 #momentum vars
-export(float) var top_speed = 30
-export(float) var accel = 75
+export(float) var top_speed = 15
+export(float) var accel = 65
 export(float) var grav = 32
-export(float) var jump_power = 35
+export(float) var jump_power = 12
 export(float) var air_multi = 0.2
 var air_jump = true
 
@@ -34,6 +34,7 @@ func cap_mouse():
 		
 
 func kill():
+	print ("reloading...")
 	get_tree().reload_current_scene()
 	
 func jump():
@@ -54,7 +55,7 @@ func _process(delta):
 		air_jump = true
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
-	if Input.is_action_just_pressed("restart"):
+	if Input.is_action_just_pressed("reload"):
 		kill()
 		
 func _physics_process(delta):
@@ -63,19 +64,27 @@ func _physics_process(delta):
 	var direction = Vector3()
 	
 	#moving forward or backward
+	var dot_z = velocity.dot(transform.basis.z)
 	if Input.is_action_pressed("move_forw"):
+		if dot_z > 0 && is_on_floor():
+			velocity -= transform.basis.z * dot_z
 		direction -= body_basis.z
 	elif Input.is_action_pressed("move_back"):
+		if dot_z < 0 && is_on_floor():
+			velocity -= transform.basis.z * dot_z
 		direction += body_basis.z
 	
 	#moving left or right
+	var dot_x = velocity.dot(transform.basis.x)
 	if Input.is_action_pressed("move_left"):
+		if dot_x > 0 && is_on_floor():
+			velocity -= transform.basis.x * dot_x
 		direction -= body_basis.x
 	elif Input.is_action_pressed("move_right"):
+		if dot_x < 0 && is_on_floor():
+			velocity -= transform.basis.x * dot_x
 		direction += body_basis.x
 	
-	#wigglewalking be damned!
-	direction = direction.normalized()
 	var step_accel = accel
 	if !is_on_floor():
 		step_accel *= air_multi
@@ -84,16 +93,23 @@ func _physics_process(delta):
 	
 	#value velocity is moving towards
 	var target_vel = direction * top_speed
-	velocity.x = move_toward(velocity.x, target_vel.x, step_accel * delta)
-	velocity.z = move_toward(velocity.z, target_vel.z, step_accel * delta)
+	target_vel = Vector2(target_vel.x, target_vel.z)
+
 	velocity.y -= grav * delta
+	if Input.get_action_strength("debug_floater") > 0:
+		velocity.y = 1
+		air_jump = true
+	
+	var planar_vel = Vector2(velocity.x, velocity.z)
+	planar_vel = planar_vel.move_toward(target_vel, step_accel * delta)
+	velocity = Vector3(planar_vel.x, velocity.y, planar_vel.y)
 	
 	if Input.is_action_just_pressed("jump"):
 		if is_on_floor():
 			jump()
 		elif air_jump:
-			velocity.x = 0
-			velocity.z = 0
+			velocity.x *=0.5
+			velocity.z *=0.5
 			jump()
 			air_jump = false
 		

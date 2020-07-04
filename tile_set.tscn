@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://tile_set.gd" type="Script" id=1]
+[ext_resource path="res://magenta_tile.tscn" type="PackedScene" id=2]
+[ext_resource path="res://cyan_tile.tscn" type="PackedScene" id=3]
+[ext_resource path="res://grey_tile.tscn" type="PackedScene" id=4]
+
+[node name="tile_set" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="cyan_tile" parent="." instance=ExtResource( 3 )]
+
+[node name="magenta_tile" parent="." instance=ExtResource( 2 )]
+
+[node name="grey_tile" parent="." instance=ExtResource( 4 )]
