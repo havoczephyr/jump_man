@@ -7,7 +7,7 @@ const QC_ARC = PI * 0.5
 export(float) var top_speed = 15
 export(float) var accel = 65
 export(float) var grav = 32
-export(float) var jump_power = 12
+export(float) var jump_power = 18
 export(float) var air_multi = 0.2
 var air_jump = true
 

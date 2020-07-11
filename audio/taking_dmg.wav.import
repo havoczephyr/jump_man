@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/taking_dmg.wav-9b9f9c9911ec6c9fd7b3114dce8a49f9.sample"
+
+[deps]
+
+source_file="res://audio/taking_dmg.wav"
+dest_files=[ "res://.import/taking_dmg.wav-9b9f9c9911ec6c9fd7b3114dce8a49f9.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

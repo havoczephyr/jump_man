@@ -9,7 +9,7 @@ var tile_set_array = {}
 var tile_count = 0
 var write_head = 0
 
-var scale_min = 1
+var scale_min = 2
 var scale_max = 4
 var trans_rad = 6
 
@@ -43,9 +43,9 @@ func spawn_tile():
 	var tile_shuffle = [cyan, magenta, grey]
 	tile_shuffle.shuffle()
 		#set position
-	var tile_set_center = Vector3(0,0,-12 * tile_count)
-	var tile_set_right = Vector3(12,0,-12 * tile_count)
-	var tile_set_left = Vector3(-12,0,-12 * tile_count)
+	var tile_set_center = Vector3(0,0,-12.5 * tile_count)
+	var tile_set_right = Vector3(12.5,0,-12.5 * tile_count)
+	var tile_set_left = Vector3(-12.5,0,-12.5 * tile_count)
 	var position_arr = [tile_set_center, tile_set_right, tile_set_left]
 	for i in range(0, tile_shuffle.size()):
 		tile_shuffle[i].translation = get_random_offset(position_arr[i])

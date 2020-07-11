@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://audio/walk.wav" type="AudioStream" id=1]
+[ext_resource path="res://audio/jump_land.wav" type="AudioStream" id=2]
+[ext_resource path="res://audio/Hydrocity.wav" type="AudioStream" id=3]
+[ext_resource path="res://audio/jump_up.wav" type="AudioStream" id=4]
+[ext_resource path="res://audio/taking_dmg.wav" type="AudioStream" id=5]
+
+[node name="audio" type="Node"]
+
+[node name="player_audio" type="Node" parent="."]
+
+[node name="au_walk" type="AudioStreamPlayer" parent="player_audio"]
+stream = ExtResource( 1 )
+
+[node name="au_jump_start" type="AudioStreamPlayer" parent="player_audio"]
+stream = ExtResource( 4 )
+
+[node name="au_jump_land" type="AudioStreamPlayer" parent="player_audio"]
+stream = ExtResource( 2 )
+
+[node name="au_death" type="AudioStreamPlayer" parent="player_audio"]
+stream = ExtResource( 5 )
+
+[node name="music_audio" type="Node" parent="."]
+
+[node name="bg_music" type="AudioStreamPlayer" parent="music_audio"]
+stream = ExtResource( 3 )
