@@ -2,10 +2,10 @@ extends Node
 
 const AUDIO_SCENE = preload ("res://audio.tscn")
 
-var music_node
+var audio_lib
 
 func _ready():
-	_create_music_node()
+	_create_audio_lib()
 	
 func load_title():
 	pass
@@ -14,17 +14,17 @@ func load_title():
 func load_game():
 	pass
 	#placeholder: will be used to load the game scene
-func _create_music_node():
-	music_node = AUDIO_SCENE.instance()
-	_couple_music_node()
+func _create_audio_lib():
+	audio_lib = AUDIO_SCENE.instance()
+	_couple_audio_lib()
 
-func _couple_music_node():
-	get_tree().get_root().call_deferred("add child", music_node)
+func _couple_audio_lib():
+	get_tree().get_root().call_deferred("add child", audio_lib)
 
-func _decouple_music_node():
-	get_tree().get_root().remove_child(music_node)
+func _decouple_audio_lib():
+	get_tree().get_root().remove_child(audio_lib)
 
 func _switch_scene(next_scene):
-	_decouple_music_node()
+	_decouple_audio_lib()
 	get_tree().change_scene_to(next_scene)
-	_couple_music_node()
+	_couple_audio_lib()

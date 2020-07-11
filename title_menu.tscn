@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://stock_man64.jpg" type="Texture" id=1]
+[ext_resource path="res://comic.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://ButtonSans.tres" type="DynamicFont" id=3]
+[ext_resource path="res://title_menu.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 60
+outline_size = 7
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 96
+outline_size = 18
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[node name="title_menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 801.915, 451.516 )
+scale = Vector2( 1.16494, 0.871032 )
+texture = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 526.99
+margin_top = 186.6
+margin_right = 1096.99
+margin_bottom = 287.6
+custom_fonts/font = SubResource( 1 )
+text = "JUMP MAN 63.5"
+align = 1
+
+[node name="Label2" type="Label" parent="."]
+margin_left = -111.0
+margin_top = 332.202
+margin_right = 1721.0
+margin_bottom = 512.202
+custom_fonts/font = SubResource( 2 )
+text = "UNLICENSED BY NINTENDO"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -130.729
+margin_top = 235.217
+margin_right = 143.271
+margin_bottom = 308.217
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+margin_right = 274.0
+margin_bottom = 73.0
+custom_fonts/font = ExtResource( 3 )
+text = "Start Game"
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+margin_top = 77.0
+margin_right = 274.0
+margin_bottom = 150.0
+custom_fonts/font = ExtResource( 3 )
+text = "Quit Game"

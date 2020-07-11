@@ -18,6 +18,15 @@ _global_script_class_icons={
 config/name="June 23 Rd 2020mhz - Jump Man 63 . 5"
 config/icon="res://icon.png"
 
+[autoload]
+
+Manager="*res://manager.gd"
+
+[display]
+
+window/size/width=1600
+window/size/height=900
+
 [input]
 
 quit={
