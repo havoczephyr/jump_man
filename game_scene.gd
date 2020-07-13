@@ -1,7 +1,7 @@
 extends Spatial
 var tile_scene = preload("res://tile_set.tscn")
 
-export(float) var spawn_timer = 1.5
+export(float) var spawn_timer = 2
 var timer = -4.0
 
 export(int) var active_tile_sets = 4
@@ -9,14 +9,16 @@ var tile_set_array = {}
 var tile_count = 0
 var write_head = 0
 
-var scale_min = 2
-var scale_max = 4
-var trans_rad = 6
-
+var scale_min = 2.0
+var scale_max = 4.0
+var trans_rad = 6.0
+var height_var = 4.0
 var rng = RandomNumberGenerator.new()
 
 
 func _ready():
+	Manager.audio_lib.play_bg_music()
+	rng.randomize()
 	for i in range (0, active_tile_sets):
 		spawn_tile()
 
@@ -51,6 +53,8 @@ func spawn_tile():
 		tile_shuffle[i].translation = get_random_offset(position_arr[i])
 		#set scale
 		tile_shuffle[i].scale = get_random_scale()
+	
+
 func remove_tile():
 	tile_set_array [write_head].queue_free()
 
@@ -60,5 +64,7 @@ func get_random_scale():
 func get_random_offset(center):
 	var radius = rng.randf_range(0,trans_rad)
 	var angle = rng.randf_range(0, 2 * PI)
-	return Vector3 (cos(angle) * radius, 0, sin(angle) * radius) + center
+	var height = rng.randf_range(0.0,height_var)
+	return Vector3 (cos(angle) * radius, height, sin(angle) * radius) + center
+	
 	

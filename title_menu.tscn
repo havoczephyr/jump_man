@@ -76,3 +76,4 @@ margin_right = 274.0
 margin_bottom = 150.0
 custom_fonts/font = ExtResource( 3 )
 text = "Quit Game"
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_Button_pressed"]

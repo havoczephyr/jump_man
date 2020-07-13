@@ -3,6 +3,8 @@ extends KinematicBody
 #used for camera clamp
 const QC_ARC = PI * 0.5
 
+signal tile_detective (tile)
+
 #momentum vars
 export(float) var top_speed = 15
 export(float) var accel = 65
@@ -114,6 +116,18 @@ func _physics_process(delta):
 			air_jump = false
 		
 	velocity = move_and_slide(velocity, Vector3.UP)
+	
+	if is_on_floor():
+		var touched_floor = get_slide_collision(0).collider.get_parent()
+		if touched_floor.name == "MeshInstance":
+			return
+		elif touched_floor.name == "cyan_tile":
+			
+		var tf_parent = touched_floor.get_parent()
+		for i in range (0,tf_parent.get_child_count()):
+			var child = tf_parent.get_child(i)
+			if child.name != touched_floor.name:
+				child.queue_free()
 	
 	
 	
